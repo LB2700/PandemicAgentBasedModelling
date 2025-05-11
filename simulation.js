@@ -18,24 +18,24 @@ class Simulation {
 		this.time = 0;
 		this.steps = 1;
 		this.globalTimeStretch = 1;
-		this.scale = 1;
+		this.scale = 0.7;
 
 		// human parameters
 		this.perlinAcceleration = 0.7;
 		this.perlinScalar = 0.001;
 		this.socialDistanceScalar = 0.5;
-		this.socialDistanceRadius = 0.015;
+		this.socialDistanceRadius = 0.02;
 
 		// infection parameters
 		this.contractionProbability = 0.135;
-		this.contractionRadius = 0.025;
+		this.contractionRadius = 0.04;
 		this.contractionRadiusSquared = this.contractionRadius ** 2;
 		this.infectionTime = 8;
 
 		// scaled
-		this.scaledContractionRadiusSquared = this.contractionRadiusSquared / this.scale;
-		this.scaledSocialDistanceRadius = this.socialDistanceRadius / this.scale;
-		this.scaledSocialDistanceRadiusSquared = this.socialDistanceRadius ** 2 / this.scale;
+		this.scaledContractionRadiusSquared = this.contractionRadiusSquared * this.scale;
+		this.scaledSocialDistanceRadius = this.socialDistanceRadius * this.scale;
+		this.scaledSocialDistanceRadiusSquared = this.socialDistanceRadius ** 2 * this.scale;
 	}
 
 	update(dT) {

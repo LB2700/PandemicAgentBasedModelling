@@ -39,7 +39,12 @@ let mySimulation = new Simulation(simulation_options);
 mySimulation.offset = { x: 10, y: 10 };
 mySimulation.population[0].infect();
 
+mySimulation.population[0].pos = { x: 0.1, y: 0.5 };
+mySimulation.population[1].pos = { x: 0.12, y: 0.5 };
+
 let myGraph = new Graph({ x: 500, y: 300 }, { x: 0, y: 0 }, mySimulation.population.length);
+
+let myProfiler = new Profiler();
 
 let then = Date.now();
 
@@ -60,6 +65,8 @@ function restart() {
 }
 
 function loop() {
+	myProfiler.update();
+
 	now = Date.now();
 	deltaTime = (now - then) / 1000;
 	then = now;
@@ -68,7 +75,10 @@ function loop() {
 	clear(ctx, "#000000", CANVAS_SIZE);
 
 	// show the simulation
+	myProfiler.event("Show");
 	mySimulation.show(ctx);
+
+	myProfiler.event("Update");
 	mySimulation.update(deltaTime);
 
 	// mySimulation.time += deltaTime;
@@ -97,6 +107,8 @@ function loop() {
 	suseptibleCountHTML.innerHTML = `suseptible: ${
 		mySimulation.population.filter((h) => !(h.removed || h.infected)).length
 	}`;
+
+	myProfiler.event("End");
 
 	// continues the loop
 	if (mySimulation.population.filter((h) => h.infected).length != 0) {

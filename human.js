@@ -16,7 +16,6 @@ class Human {
 	// (radius/distance) * directionVector
 
 	update(simulation, dT) {
-
 		// top level update function. Any updates to humans on a frame by frame basis will happen here.
 
 		// dT stands for deltaTime, the time between two frames, smooths out the simulation at low frame rates
@@ -47,13 +46,13 @@ class Human {
 	move(simulation, dT) {
 		// top level movement function. interpolates between a perlin noise generater for smooth but random movement and a
 		// 'social distancing' algorithm to maintain a distance between humans
-		
+
 		let oldPos = { ...this.pos };
 		let sdA = this.get_social_distance_velocity(simulation, dT);
 		let pA = this.get_perlin_velocity(simulation, dT);
 		let vel = {
-			x: (lerp(sdA.x, pA.x, 0.9) * simulation.globalTimeStretch) / simulation.scale,
-			y: (lerp(sdA.y, pA.y, 0.9) * simulation.globalTimeStretch) / simulation.scale,
+			x: lerp(sdA.x, pA.x, 0.9) * simulation.globalTimeStretch * simulation.scale,
+			y: lerp(sdA.y, pA.y, 0.9) * simulation.globalTimeStretch * simulation.scale,
 		};
 		this.pos.x += vel.x;
 		this.pos.y += vel.y;
@@ -95,20 +94,22 @@ class Human {
 				return oHuman.pos.x > min.x && oHuman.pos.y > min.y && oHuman.pos.x < max.x && oHuman.pos.y < max.y;
 			})
 			.forEach((oHuman) => {
-				let d =
-					(simulation.scaledSocialDistanceRadiusSquared / Math.max(distSquared(oHuman.pos, this.pos), 0.001)) ** 2;
+				let d = Math.min(
+					(simulation.scaledSocialDistanceRadiusSquared / distSquared(oHuman.pos, this.pos)) ** 2,
+					1
+				);
 
 				let newVel = { x: (this.pos.x - oHuman.pos.x) * d, y: (this.pos.y - oHuman.pos.y) * d };
 				out.x += newVel.x;
 				out.y += newVel.y;
 			});
-		
+
 		// solves the issue with clumping on the edges? pretty much just applies the social distancing algorithm to the edges
 		// along with the other humans. Doesn't solve the issue entirely, humans will still clump at high densities but sure look.
-		out.x += ((simulation.scaledSocialDistanceRadius * 0.5) / -this.pos.x) ** 2 * 0.05;
-		out.x -= ((simulation.scaledSocialDistanceRadius * 0.5) / (this.pos.x - 1)) ** 2 * 0.05;
-		out.y += ((simulation.scaledSocialDistanceRadius * 0.5) / -this.pos.y) ** 2 * 0.05;
-		out.y -= ((simulation.scaledSocialDistanceRadius * 0.5) / (this.pos.y - 1)) ** 2 * 0.05;
+		out.x += Math.min((simulation.scaledSocialDistanceRadius / -this.pos.x) ** 2 * 0.05, 0.2);
+		out.x -= Math.min((simulation.scaledSocialDistanceRadius / (this.pos.x - 1)) ** 2 * 0.05, 0.2);
+		out.y += Math.min((simulation.scaledSocialDistanceRadius / -this.pos.y) ** 2 * 0.05, 0.2);
+		out.y -= Math.min((simulation.scaledSocialDistanceRadius / (this.pos.y - 1)) ** 2 * 0.05, 0.2);
 
 		// scale end result for ease of tweaking
 		out.x *= simulation.socialDistanceScalar;
@@ -158,8 +159,6 @@ class Human {
 					return false;
 				}
 			});
-
-			//console.log(filtered.length);
 
 			filtered.forEach((oH) => {
 				if (Math.random() * simulation.globalTimeStretch < simulation.contractionProbability * dT) {
