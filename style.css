@@ -7,3 +7,19 @@ h2 {
     color: white;
     font-family: sans-serif;
 }
+
+#stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    padding: 10px;
+
+}
+#restart_button {
+    background-color: gray;
+    color: black;
+    border: none;
+    padding: 30px 40px;
+    font-size: 20px;
+    cursor: pointer;
+}
