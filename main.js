@@ -102,9 +102,9 @@ function loop() {
 
 	myGraph.show(ctx);
 
-	infectedCountHTML.innerHTML = `infected: ${mySimulation.population.filter((h) => h.infected).length}`;
-	recoveredCountHTML.innerHTML = `recovered: ${mySimulation.population.filter((h) => h.removed).length}`;
-	suseptibleCountHTML.innerHTML = `suseptible: ${
+	infectedCountHTML.innerHTML = `Infected: ${mySimulation.population.filter((h) => h.infected).length}`;
+	recoveredCountHTML.innerHTML = `Recovered: ${mySimulation.population.filter((h) => h.removed).length}`;
+	suseptibleCountHTML.innerHTML = `Suseptible: ${
 		mySimulation.population.filter((h) => !(h.removed || h.infected)).length
 	}`;
 
