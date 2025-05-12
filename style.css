@@ -8,18 +8,19 @@ h2 {
     font-family: sans-serif;
 }
 
-#stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: left;
-    padding: 10px;
-
+.stats {
+  min-width: 350px;
 }
-#restart_button {
-    background-color: gray;
-    color: black;
-    border: none;
-    padding: 30px 40px;
-    font-size: 20px;
-    cursor: pointer;
+
+.stats select {
+  appearance: auto;
+  width: 50px;
+  height: 20px;
+  font-size: 1.15rem;
+  padding: 0.675em 6em 0.675em 1em;
+  background-color: #fff;
+  border: 1px solid #caced1;
+  border-radius: 0.25rem;
+  color: black;
+  cursor: pointer;
 }
