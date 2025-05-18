@@ -3,6 +3,7 @@ class Simulation {
 		// any options about the actual simulation
 		this.options = options;
 
+
 		// offset the simulation visualisation
 		this.offset = { x: 0, y: 0 };
 

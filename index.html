@@ -44,6 +44,8 @@
 			defer
 			src="main.js"
 		></script>
+	
+		</div>
 		<div class="stats">
 		<select id="select">
 			<option value="300">town2</option>
@@ -53,5 +55,19 @@
 		<div class ="restart_button">
 		<button onclick="restart()">Restart</button>
 		</div>
+		<div id = "slider">
+			<label for="infectibility">Infectibility</label>
+  			<input type="range" id="slider" name="slider" min="0" max="10" />
+			<datalist id="markers">
+  			<option value="0">0</option>
+  			<option value="2">2</option>
+  			<option value="4">4</option>
+  			<option value="6">6</option>
+  			<option value="8">8</option>
+			<option value ="10">10</option>
+			</datalist>
+
+		</div>
+
 	</body>
 </html>
