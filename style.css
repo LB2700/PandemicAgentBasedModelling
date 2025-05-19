@@ -125,6 +125,18 @@ button {
   margin-left: 6px;
 }
 
-#graph {
+#charts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+h1 {
+  color: white;
+  font-family: sans-serif;
+  font-size: 40px;
+  margin: 10px;
+  text-align: left;
   
 }
