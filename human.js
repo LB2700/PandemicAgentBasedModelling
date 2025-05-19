@@ -75,34 +75,17 @@ class Human {
 
 	get_social_distance_velocity(simulation, dT) {
 		let out = { x: 0, y: 0 };
-		let optimization = 3;
+		let optimization = 10;
 
 		// TODO: some visuals to go along with the project to explain some of the algorithms we used? like how we optimised this with the filter. lmk could be a shout
-		let filtered = simulation.population
-			.filter((oHuman) => {
-				if (oHuman.index === this.index) return false;
-				if (oHuman.removed) return false;
+		simulation.population.forEach((oHuman) => {
+			if (oHuman.index === this.index || oHuman.removed) return;
+			let d = Math.min((simulation.scaledSocialDistanceRadiusSquared / distSquared(oHuman.pos, this.pos)) ** 2, 1);
 
-				let min = {
-					x: this.pos.x - simulation.scaledSocialDistanceRadius * optimization,
-					y: this.pos.y - simulation.scaledSocialDistanceRadius * optimization,
-				};
-				let max = {
-					x: this.pos.x + simulation.scaledSocialDistanceRadius * optimization,
-					y: this.pos.y + simulation.scaledSocialDistanceRadius * optimization,
-				};
-				return oHuman.pos.x > min.x && oHuman.pos.y > min.y && oHuman.pos.x < max.x && oHuman.pos.y < max.y;
-			})
-			.forEach((oHuman) => {
-				let d = Math.min(
-					(simulation.scaledSocialDistanceRadiusSquared / distSquared(oHuman.pos, this.pos)) ** 2,
-					1
-				);
-
-				let newVel = { x: (this.pos.x - oHuman.pos.x) * d, y: (this.pos.y - oHuman.pos.y) * d };
-				out.x += newVel.x;
-				out.y += newVel.y;
-			});
+			let newVel = { x: (this.pos.x - oHuman.pos.x) * d, y: (this.pos.y - oHuman.pos.y) * d };
+			out.x += newVel.x;
+			out.y += newVel.y;
+		});
 
 		// solves the issue with clumping on the edges? pretty much just applies the social distancing algorithm to the edges
 		// along with the other humans. Doesn't solve the issue entirely, humans will still clump at high densities but sure look.

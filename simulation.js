@@ -28,7 +28,7 @@ class Simulation {
 		this.socialDistanceRadius = 0.02;
 
 		// infection parameters
-		this.contractionProbability = 0.135;
+		this.contractionProbability = 0.035;
 		this.contractionRadius = 0.04;
 		this.contractionRadiusSquared = this.contractionRadius ** 2;
 		this.infectionTime = 8;
@@ -46,6 +46,33 @@ class Simulation {
 			this.population.forEach((human) => {
 				human.update(this, dT / this.steps);
 			});
+		}
+	}
+
+	update_debug(dT) {
+		for (let i = 0; i < this.steps; i++) {
+			this.time += (this.globalTimeStretch * dT) / this.steps;
+
+			myProfiler.update();
+
+			this.population.forEach((human) => {
+				human.move(this, dT / this.steps);
+			});
+
+			myProfiler.event("Move");
+
+			this.population.forEach((human) => {
+				human.infectOthers(this, dT / this.steps);
+			});
+
+			myProfiler.event("InfectOthers");
+
+			this.population.forEach((human) => {
+				human.progressInfection(this, dT / this.steps);
+			});
+
+			myProfiler.event("ProgressInfection");
+			console.log(myProfiler.times);
 		}
 	}
 
