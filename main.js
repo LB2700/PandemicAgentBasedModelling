@@ -24,7 +24,7 @@ const ctx = canvas.getContext("2d");
 const CANVAS_SIZE = { x: 420, y: 420 };
 
 // add canvas to the html page
-document.body.appendChild(canvas);
+document.getElementById("sim").appendChild(canvas);
 
 // set the width and height of the canvas
 canvas.width = CANVAS_SIZE.x;
@@ -83,9 +83,9 @@ function loop() {
 	myGraph.show(ctx);
 
 	// update html stats
-	infectedCountHTML.innerHTML = `infected: ${mySimulation.population.filter((h) => h.infected).length}`;
-	recoveredCountHTML.innerHTML = `recovered: ${mySimulation.population.filter((h) => h.removed).length}`;
-	suseptibleCountHTML.innerHTML = `suseptible: ${
+	infectedCountHTML.innerHTML = `Infected: ${mySimulation.population.filter((h) => h.infected).length}`;
+	recoveredCountHTML.innerHTML = `Recovered: ${mySimulation.population.filter((h) => h.removed).length}`;
+	suseptibleCountHTML.innerHTML = `Suseptible: ${
 		mySimulation.population.filter((h) => !(h.removed || h.infected)).length
 		}`;
 	

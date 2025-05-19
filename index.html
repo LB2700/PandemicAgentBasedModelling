@@ -6,6 +6,7 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
+		<link rel="stylesheet" href="style.css">
 		<title>Document</title>
 	</head>
 	<body>
@@ -48,13 +49,39 @@
 			defer
 			src="main.js"
 		></script>
-		<div id="stats"></div>
+	
+		</div>
+		<div class="stats">
 		<select id="select">
 			<option value="2000">town2</option>
 			<option value="800">town1</option>
 		</select>
+		</div>
+		<div class ="restart_button">
 		<button onclick="restart()">Restart</button>
 
 		<div id="debug"></div>
+		</div>
+		<div id = "slider">
+			<label for="infectibility">Infectibility</label>
+  			<input type="range" id="slider" name="slider" min="0" max="10" />
+			<datalist id="markers">
+  			<option value="0">0</option>
+  			<option value="2">2</option>
+  			<option value="4">4</option>
+  			<option value="6">6</option>
+  			<option value="8">8</option>
+			<option value ="10">10</option>
+			</datalist>
+		</div>
+		
+		<div id = "h2"></div>
+
+	<div id = "charts">
+		<div id = "graph"></div>
+		<div id ="sim"></div>
+	</div>
+		
+
 	</body>
 </html>

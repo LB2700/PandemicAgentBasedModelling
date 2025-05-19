@@ -1,0 +1,130 @@
+body {
+    background-color: black;
+}
+
+h2 {
+    font-size: 15px;
+    color: white;
+    font-family: sans-serif;
+    margin: 10px;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+  background-color: white;
+
+}
+
+select {
+  border: 2px solid #ddd;
+  background: #eee;
+  padding: 2px;
+  transition: 0.4s;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  font-size: 15px;
+  margin: 10px;
+}
+
+select:open::picker-icon {
+  rotate: 180deg; 
+}
+select:open {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background-color: #eee;
+  
+}
+selectedcontent .icon {
+  display: none;
+}
+option:checked {
+  font-weight: bold;
+}
+
+::picker(select) {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-color: #ddd;
+}
+
+button {
+  border: 2px solid #ddd;
+  background: #eee;
+  padding: 2px;
+  transition: 0.4s;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#slider {
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  justify-content: left;
+  margin: 6px; 
+}
+
+#slider label {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 15px;
+  margin: 6px;
+}
+
+#slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 5px;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  padding: 0px;
+  outline: none;
+  padding: 0px 0;
+  background-color: rgb(12, 255, 8);
+
+}
+#slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -5px;
+  background-color: rgb(12, 255, 8);
+}
+
+#markers {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+#graph {
+  
+}
