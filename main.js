@@ -24,7 +24,7 @@ const ctx = canvas.getContext("2d");
 const CANVAS_SIZE = { x: 420, y: 420 };
 
 // add canvas to the html page
-document.body.appendChild(canvas);
+document.getElementById("sim").appendChild(canvas);
 
 // set the width and height of the canvas
 canvas.width = CANVAS_SIZE.x;

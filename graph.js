@@ -10,7 +10,7 @@ class Graph {
 		this.canvas.width = size.x;
 		this.canvas.height = size.y;
 
-		document.body.appendChild(this.canvas);
+		document.getElementById("graph").appendChild(this.canvas);
 
 		this.size = size;
 		this.pos = position;
