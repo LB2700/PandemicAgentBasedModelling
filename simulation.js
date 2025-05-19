@@ -48,6 +48,33 @@ class Simulation {
 		}
 	}
 
+	update_debug(dT) {
+		for (let i = 0; i < this.steps; i++) {
+			this.time += (this.globalTimeStretch * dT) / this.steps;
+
+			myProfiler.update();
+
+			this.population.forEach((human) => {
+				human.move(this, dT / this.steps);
+			});
+
+			myProfiler.event("Move");
+
+			this.population.forEach((human) => {
+				human.infectOthers(this, dT / this.steps);
+			});
+
+			myProfiler.event("InfectOthers");
+
+			this.population.forEach((human) => {
+				human.progressInfection(this, dT / this.steps);
+			});
+
+			myProfiler.event("ProgressInfection");
+			console.log(myProfiler.times);
+		}
+	}
+
 	show(ctx) {
 		// draw boundries of the simulation
 		ctx.strokeStyle = "#ffffff";
