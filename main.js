@@ -30,7 +30,7 @@ document.body.appendChild(canvas);
 canvas.width = CANVAS_SIZE.x;
 canvas.height = CANVAS_SIZE.y;
 
-// create the simulation
+// create and start the simulation
 let simulation_options = {
 	size: { x: 400, y: 400 },
 	populationSize: mySelect.children[0].getAttribute("value"),
@@ -39,15 +39,13 @@ let mySimulation = new Simulation(simulation_options);
 mySimulation.offset = { x: 10, y: 10 };
 mySimulation.population[0].infect();
 
-mySimulation.population[0].pos = { x: 0.1, y: 0.5 };
-mySimulation.population[1].pos = { x: 0.12, y: 0.5 };
-
+// create the graph
 let myGraph = new Graph({ x: 500, y: 300 }, { x: 0, y: 0 }, mySimulation.population.length);
 
+// use a profiler to track how long functions take
 let myProfiler = new Profiler();
 myProfiler.update();
 myProfiler.event("test");
-myProfiler.show();
 
 let then = Date.now();
 
@@ -78,34 +76,19 @@ function loop() {
 	// show the simulation
 	mySimulation.show(ctx);
 
+	// tick
 	mySimulation.update_debug(deltaTime);
 
-	// mySimulation.time += deltaTime;
-
-	// let times = [];
-
-	// now = Date.now();
-	// mySimulation.population.forEach((h) => {
-	// 	h.move(mySimulation, deltaTime);
-	// });
-	// times.push(Date.now() - now);
-	// mySimulation.population.forEach((h) => {
-	// 	h.infectOthers(mySimulation, deltaTime);
-	// });
-	// times.push(Date.now() - now);
-	// mySimulation.population.forEach((h) => {
-	// 	h.progressInfection(deltaTime);
-	// });
-	// times.push(Date.now() - now);
-	// console.log(`Move takes ${times[0]} milliseconds`);
-
+	// show
 	myGraph.show(ctx);
 
+	// update html stats
 	infectedCountHTML.innerHTML = `infected: ${mySimulation.population.filter((h) => h.infected).length}`;
 	recoveredCountHTML.innerHTML = `recovered: ${mySimulation.population.filter((h) => h.removed).length}`;
 	suseptibleCountHTML.innerHTML = `suseptible: ${
 		mySimulation.population.filter((h) => !(h.removed || h.infected)).length
-	}`;
+		}`;
+	
 
 	// continues the loop
 	if (mySimulation.population.filter((h) => h.infected).length != 0) {
@@ -115,7 +98,3 @@ function loop() {
 
 // starts the loop()
 window.requestAnimationFrame(loop);
-
-setInterval(() => {
-	myGraph.update(mySimulation);
-}, 500);
