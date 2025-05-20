@@ -10,7 +10,7 @@ class Profiler {
 			child.classList.add("debugLabel");
 			child.classList.add(t.eventName);
 			child.innerText = t.time;
-			this.div.appendChild(child);
+			//this.div.appendChild(child);
 		});
 
 		this.startTime = 0;
