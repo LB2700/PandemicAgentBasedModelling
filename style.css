@@ -14,13 +14,15 @@
 * {
 	font-family: "Montserrat", sans-serif;
 	/* font-weight: 100; */
-	color: white;
+
 }
 
 body {
 	background-color: black;
 	display: flex;
 	flex-direction: row;
+  margin: 0px;
+  overflow: hidden;
 }
 
 h2 {
@@ -145,23 +147,35 @@ button {
 
 #charts {
 	display: flex;
-	justify-content: left;
+	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
+  padding: 20px;
+  width: max-content
 }
 
+#graph {
+  padding-inline: 20px;
+}
+
+#sim {
+  padding-inline: 20px;
+}
 h1 {
 	color: white;
 	font-family: "Montserrat";
+  font-weight: 100;
 	font-size: 40px;
 	margin: 10px;
 	text-align: left;
+  padding-left: 40px;
 }
 
 #body {
 	justify-content: left;
 	flex-direction: column;
 	display: flex;
+  
 }
 
 #menu {
@@ -170,5 +184,11 @@ h1 {
   flex-direction: column;
   margin-left: 10px;
   min-width: 150px;
-  background-color: var(--raisin-black)
+  background-color: var(--raisin-black);
+  background-repeat: no-repeat;
+  background-position: left;
+  padding: 10px;
+  margin: 0px;
+  height: 100vh;
+
 }
