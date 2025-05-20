@@ -9,14 +9,16 @@ mySelect.onchange = (ev) => {
 
 // the canvas html element we will be drawing on
 const canvas = document.createElement("canvas");
-const statsHTML = document.getElementById("stats");
+const statsHTML = document.createElement("div");
+console.log(statsHTML);
 const infectedCountHTML = document.createElement("h2");
 const recoveredCountHTML = document.createElement("h2");
 const suseptibleCountHTML = document.createElement("h2");
-document.body.appendChild(infectedCountHTML);
-document.body.appendChild(recoveredCountHTML);
-document.body.appendChild(suseptibleCountHTML);
-
+statsHTML.appendChild(infectedCountHTML);
+statsHTML.appendChild(recoveredCountHTML);
+statsHTML.appendChild(suseptibleCountHTML);
+statsHTML.setAttribute("id", "figures");
+document.getElementById("figures").appendChild(statsHTML)
 // the canvas 'context' that gives us functions to draw with
 const ctx = canvas.getContext("2d");
 
