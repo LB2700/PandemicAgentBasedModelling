@@ -219,6 +219,6 @@ h3 {
   flex-direction: column;
   margin: 0px;
   padding: 16px;
-  box-shadow: inset 0px 0px 3px var(--eerie-black);
+  box-shadow: inset 0px 0px 4px var(--eerie-black);
 
 }
