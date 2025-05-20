@@ -10,6 +10,7 @@
 	--indian-red: #d05153ff;
 	--icterine: #ffff70ff;
 	--spring-green: #3ef47eff;
+  --smoky: #dcdad9;
 }
 
 * {
@@ -19,7 +20,7 @@
 }
 
 body {
-	background-color: black;
+	background-color: var(--eerie-black);
 	display: flex;
 	flex-direction: row;
   margin: 0px;
@@ -172,11 +173,17 @@ button {
 h1 {
 	color: white;
 	font-family: "Montserrat";
-  font-weight: 100;
+  font-weight: 150;
 	font-size: 40px;
 	margin: 10px;
 	text-align: left;
   padding-left: 40px;
+  background-color: var(--falu-red);
+  width: 100%;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 100px;
 }
 
 #body {
@@ -195,8 +202,24 @@ h1 {
   background-color: var(--raisin-black);
   background-repeat: no-repeat;
   background-position: left;
-  padding: 10px;
+  padding: 0px;
   margin: 0px;
   height: 100vh;
+
+}
+
+h3 {
+  color: var(--indian-red);
+  font-family: "Montserrat";
+  font-weight: 300;
+  font-size: 30px;
+  display: flex;
+  background-color: var(--smoky);
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  margin: 0px;
+  padding: 16px;
+  box-shadow: inset 0px 0px 3px var(--eerie-black);
 
 }

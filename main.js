@@ -73,7 +73,7 @@ function loop() {
 	then = now;
 
 	// fill the entire canvas with black
-	clear(ctx, "#000000", CANVAS_SIZE);
+	clear(ctx, "#201e1dff", CANVAS_SIZE);
 
 	// show the simulation
 	mySimulation.show(ctx);
