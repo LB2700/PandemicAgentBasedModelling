@@ -13,12 +13,14 @@
 
 * {
 	font-family: "Montserrat", sans-serif;
-  font-weight: 100;
+	/* font-weight: 100; */
 	color: white;
 }
 
 body {
 	background-color: black;
+	display: flex;
+	flex-direction: row;
 }
 
 h2 {
@@ -142,31 +144,30 @@ button {
 }
 
 #charts {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  flex-direction: row;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	flex-direction: row;
 }
 
 h1 {
-  color: white;
-  font-family: "Montserrat";
-  font-size: 40px;
-  margin: 10px;
-  text-align: left;
-
+	color: white;
+	font-family: "Montserrat";
+	font-size: 40px;
+	margin: 10px;
+	text-align: left;
 }
 
 #body {
-  justify-content: left;
-  flex-direction: row;
-  display: flex;
+	justify-content: left;
+	flex-direction: column;
+	display: flex;
 }
 
 #menu {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  flex-direction: column;
-  margin-left: 10px;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	flex-direction: column;
+	margin-left: 10px;
 }

@@ -79,7 +79,7 @@ class Human {
 
 		// TODO: some visuals to go along with the project to explain some of the algorithms we used? like how we optimised this with the filter. lmk could be a shout
 		simulation.population.forEach((oHuman) => {
-			if (oHuman.index === this.index || oHuman.removed) return;
+			if (oHuman.index === this.index) return;
 			let d = Math.min((simulation.scaledSocialDistanceRadiusSquared / distSquared(oHuman.pos, this.pos)) ** 2, 1);
 
 			let newVel = { x: (this.pos.x - oHuman.pos.x) * d, y: (this.pos.y - oHuman.pos.y) * d };

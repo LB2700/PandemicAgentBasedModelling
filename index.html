@@ -40,39 +40,41 @@
 		></script>
 	
 		</div>
-		<h1>Agent Based Pandemic Modelling</h1>
-	<div id = "body">
+		
 		<div id = "menu">
-		<div class="stats">
-		<select id="select">
-			<option value="2000">town2</option>
-			<option value="800">town1</option>
-		</select>
-		</div>
-		<div class ="restart_button">
-		<button onclick="restart()">Restart</button>
-
-		<div id="debug"></div>
+			<div class="stats">
+				<select id="select">
+					<option value="2000">town2</option>
+					<option value="800">town1</option>
+				</select>
+			</div>
+			<div class ="restart_button">
+			<button onclick="restart()">Restart</button>
+			<div id="debug"></div>
 		</div>
 		<div id = "slider">
 			<label for="infectibility">Infectibility</label>
-  			<input type="range" id="slider" name="slider" min="0" max="10" />
+			<input type="range" id="slider" name="slider" min="0" max="10" />
 			<datalist id="markers">
-  			<option value="0">0</option>
-  			<option value="2">2</option>
-  			<option value="4">4</option>
-  			<option value="6">6</option>
-  			<option value="8">8</option>
+			<option value="0">0</option>
+			<option value="2">2</option>
+			<option value="4">4</option>
+			<option value="6">6</option>
+			<option value="8">8</option>
 			<option value ="10">10</option>
 			</datalist>
 		</div>
 		<div id="figures"></div>
 		</div>
 
-		<div id = "charts">
-		<div id = "sim"></div>
-		<div id ="graph"></div>
-		</div>
+		<div id = "body">
+			<h1>Agent Based Pandemic Modelling</h1>
+
+
+			<div id = "charts">
+				<div id = "sim"></div>
+				<div id ="graph"></div>
+			</div>
 	</div>	
 
 	</body>
