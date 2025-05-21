@@ -158,9 +158,9 @@ class Human {
 		// maybe draw the humans in the different way based  on whether they are infect/removed? different colours?
 		ctx.beginPath();
 		// colour of human
-		ctx.fillStyle = "#00ff00";
-		if (this.removed) ctx.fillStyle = "#ffff00";
-		if (this.infected) ctx.fillStyle = "#ff0000";
+		ctx.fillStyle = colors[2];
+		if (this.removed) ctx.fillStyle = colors[1];
+		if (this.infected) ctx.fillStyle = colors[0];
 		ctx.arc(
 			this.pos.x * simulation_options.size.x + simulation.offset.x,
 			this.pos.y * simulation_options.size.y + simulation.offset.y,

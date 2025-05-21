@@ -1,7 +1,33 @@
-let mySelect = document.getElementById("select");
-mySelect.onchange = (ev) => {
-	const selectedValue = ev.target.value;
-	simulation_options.scale = selectedValue;
+const colors = ["--indian-red", "--icterine", "--spring-green", "--raisin-black"].map((propertyName) => {
+	return window.getComputedStyle(document.body).getPropertyValue(propertyName);
+});
+
+let currentVirus = 2;
+const virusPresets = [
+	{
+		contractionProbability: 0.1,
+		contractionRadius: 0.05,
+		infectionTime: 1800,
+	},
+	{
+		contractionProbability: 0.2,
+		contractionRadius: 0.045,
+		infectionTime: 500,
+	},
+	{
+		contractionProbability: 0.175,
+		contractionRadius: 0.075,
+		infectionTime: 160,
+	},
+];
+document.querySelector("select.VirusPicker").onchange = (ev) => {
+	currentVirus = ev.target.value;
+
+	restart();
+};
+
+document.querySelector("select.PopulationPicker").onchange = (ev) => {
+	simulation_options.scale = ev.target.value;
 
 	restart();
 };
@@ -10,9 +36,9 @@ mySelect.onchange = (ev) => {
 const canvas = document.createElement("canvas");
 const statsHTML = document.createElement("div");
 console.log(statsHTML);
-const infectedCountHTML = document.createElement("h2");
-const recoveredCountHTML = document.createElement("h2");
-const suseptibleCountHTML = document.createElement("h2");
+const infectedCountHTML = document.createElement("p");
+const recoveredCountHTML = document.createElement("p");
+const suseptibleCountHTML = document.createElement("p");
 statsHTML.appendChild(infectedCountHTML);
 statsHTML.appendChild(recoveredCountHTML);
 statsHTML.appendChild(suseptibleCountHTML);
@@ -33,9 +59,10 @@ canvas.height = CANVAS_SIZE.y;
 
 // create and start the simulation
 let simulation_options = {
-	scale: 1,
+	scale: 4,
 	size: { x: 400, y: 400 },
 	populationSize: 400,
+	...virusPresets[currentVirus],
 };
 let mySimulation = new Simulation(simulation_options);
 mySimulation.offset = { x: 10, y: 10 };
@@ -55,6 +82,7 @@ function restart() {
 	// if (myGraph && myGraph.canvas) {
 	// 	document.body.removeChild(myGraph.canvas);
 	// }
+	simulation_options = { ...simulation_options, ...virusPresets[currentVirus] };
 	mySimulation.restart(simulation_options);
 	mySimulation.population[0].infect();
 
@@ -70,7 +98,7 @@ function loop() {
 	then = now;
 
 	// fill the entire canvas with black
-	clear(ctx, "#201e1dff", CANVAS_SIZE);
+	clear(ctx, colors[3], CANVAS_SIZE);
 
 	// show the simulation
 	mySimulation.show(ctx);

@@ -6,33 +6,62 @@
 	--raisin-black: #2b2827ff;
 	--eerie-black: #201e1dff;
 	--licorice: #181211ff;
-	--falu-red: #78171aff;
+	--falu-red: rgb(99, 7, 12);
 	--indian-red: #d05153ff;
 	--icterine: #ffff70ff;
 	--spring-green: #3ef47eff;
-  --smoky: #dcdad9;
+	--smoky: #e3dfdc;
+	--smoky-dark: #bebbba;
 }
 
 * {
 	font-family: "Montserrat", sans-serif;
 	/* font-weight: 100; */
-
 }
 
 body {
-	background-color: var(--eerie-black);
-	display: flex;
-	flex-direction: row;
-  margin: 0px;
-  overflow: hidden;
+	background-color: var(--raisin-black);
+	display: grid;
+	grid-template-columns: 180px auto;
+	grid-template-rows: 64px auto;
+	height: 100vh;
+	margin: 0px;
+	overflow: hidden;
 }
 
-h2 {
-	font-size: 18px;
-	font-weight: 200;
-	color: white;
+h3 {
+	font-weight: 400;
+}
+h4 {
+	font-weight: 300;
+}
+
+.SelectLabel {
+	margin: 0 0 2px 0;
+}
+
+h2.Header {
+	margin: 0;
 	font-family: "Montserrat";
-	margin: 10px;
+	font-size: 40px;
+	font-weight: 300;
+	align-content: center;
+}
+h2.Header.Menu {
+	text-align: center;
+	color: var(--falu-red);
+	background-color: var(--smoky);
+}
+h2.Header.ABPM {
+	padding-left: 32px;
+	color: var(--smoky);
+	background-color: var(--falu-red);
+}
+
+.Settings {
+	display: flex;
+	gap: 12px;
+	flex-direction: column;
 }
 
 select,
@@ -47,7 +76,7 @@ select {
 	padding: 2px;
 	transition: 0.4s;
 	border-radius: 5px;
-	width: 100px;
+	min-width: 100px;
 	height: 30px;
 	text-align: center;
 	display: flex;
@@ -55,7 +84,6 @@ select {
 	justify-content: center;
 	font-family: "Montserrat";
 	font-size: 15px;
-	margin: 10px;
 }
 
 select:open::picker-icon {
@@ -82,10 +110,10 @@ option:checked {
 }
 
 option::checkmark {
-  order: 1;
-  margin-left: auto;
-  content: "";
-  /*to do better tick*/
+	order: 1;
+	margin-left: auto;
+	content: "";
+	/*to do better tick*/
 }
 
 button {
@@ -103,22 +131,14 @@ button {
 	font-family: "Montserrat";
 	font-size: 15px;
 	cursor: pointer;
-	margin: 10px;
 }
 
 #slider {
 	display: flex;
+	margin: 0;
 	align-items: left;
 	flex-direction: column;
 	justify-content: left;
-	margin: 6px;
-}
-
-#slider label {
-	color: #eee;
-	font-family: "Montserrat";
-	font-size: 15px;
-	margin: 6px;
 }
 
 #slider input[type="range"] {
@@ -148,56 +168,63 @@ button {
 	width: 100px;
 	display: flex;
 	justify-content: space-between;
-	margin-top: 5px;
 	color: white;
 	font-family: "Montserrat";
 	font-size: 12px;
-	margin-left: 6px;
 }
 
 #charts {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
+	gap: 32px;
 	align-items: center;
 	flex-direction: row;
-  padding: 20px;
-  width: max-content
+	padding: 20px;
+	width: max-content;
 }
 
 #graph {
-  padding-inline: 20px;
+	padding-inline: 20px;
 }
 
 #sim {
-  padding-inline: 20px;
+	padding-inline: 20px;
+}
+h1,
+h3 {
+	margin: 10px;
+	text-align: left;
+	width: 100%;
+	margin: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 100px;
 }
 h1 {
 	color: white;
 	font-family: "Montserrat";
-  font-weight: 150;
+	font-weight: 150;
 	font-size: 40px;
-	margin: 10px;
 	text-align: left;
-  padding-left: 40px;
-  background-color: var(--falu-red);
-  width: 100%;
-  margin: 0px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 100px;
+	padding-left: 40px;
+	background-color: var(--falu-red);
 }
 
 #body {
 	justify-content: left;
 	flex-direction: column;
 	display: flex;
+	flex-grow: 1;
 }
 
 #menu {
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-  margin-left: 10px;
-  min-width: 150px;
-  background-color: var(--raisin-black)
+	display: flex;
+	justify-content: left;
+	flex-direction: column;
+	gap: 16px;
+	padding: 12px;
+	background-color: var(--smoky-dark);
+}
+#menu * {
+	color: #000000;
 }

@@ -23,7 +23,6 @@ class Graph {
 	}
 
 	update(simulation) {
-		
 		let data = {
 			suseptible: simulation.population.filter((h) => !(h.infected || h.removed)).length,
 			infected: simulation.population.filter((h) => h.infected).length,
@@ -69,11 +68,11 @@ class Graph {
 		};
 
 		// fill background with green. the parts subtracted from the other two graphs represents the people who haven't gotten the virus
-		this.ctx.fillStyle = "#00ff00";
+		this.ctx.fillStyle = colors[2];
 		this.ctx.fillRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
 
 		// infected
-		drawGraph("#ff0000", infectedCtx, (x, data) => {
+		drawGraph(colors[0], infectedCtx, (x, data) => {
 			//console.log((data.suseptible / this.populationSize) * this.size.y);
 			return { x: x * this.size.x, y: (1 - data.infected / this.populationSize) * this.size.y };
 		});
@@ -81,7 +80,7 @@ class Graph {
 
 		// infected
 		drawGraph(
-			"#ffff00",
+			colors[1],
 			removedCtx,
 			(x, data) => {
 				//console.log((data.suseptible / this.populationSize) * this.size.y);

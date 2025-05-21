@@ -27,15 +27,17 @@ class Simulation {
 		this.socialDistanceRadius = 0.02;
 
 		// infection parameters
-		this.contractionProbability = 0.135;
-		this.contractionRadius = 0.04;
+		this.contractionProbability = options.contractionProbability;
+		this.contractionRadius = options.contractionRadius;
 		this.contractionRadiusSquared = this.contractionRadius ** 2;
-		this.infectionTime = 600;
+		this.infectionTime = options.infectionTime;
 
 		// scaled
 		this.scaledContractionRadiusSquared = this.contractionRadiusSquared * this.scale;
 		this.scaledSocialDistanceRadius = this.socialDistanceRadius * this.scale;
 		this.scaledSocialDistanceRadiusSquared = this.socialDistanceRadius ** 2 * this.scale;
+
+		console.log(options);
 	}
 
 	update(dT) {
@@ -93,6 +95,12 @@ class Simulation {
 	}
 
 	restart(options) {
+		// infection parameters
+		this.contractionProbability = options.contractionProbability;
+		this.contractionRadius = options.contractionRadius;
+		this.contractionRadiusSquared = this.contractionRadius ** 2;
+		this.infectionTime = options.infectionTime;
+
 		this.scale = options.scale;
 		this.population = [];
 		for (let i = 0; i < options.populationSize; i++) {
