@@ -34,12 +34,11 @@ class Human {
 
 	progressInfection(simulation, dT) {
 		// 'progresses' the infection. Makes it last a certain length with a counter.
-		if (this.infectionTime == 0) {
-		} else if (this.infectionTime < 0) {
+		if (this.infectionTime < 0) {
 			this.infected = false;
 			this.removed = true;
-		} else {
-			this.infectionTime -= dT * simulation.globalTimeStretch;
+		} else if (this.infected) {
+			this.infectionTime -= simulation.globalTimeStretch;
 		}
 	}
 
@@ -56,7 +55,7 @@ class Human {
 		};
 		this.pos.x += vel.x;
 		this.pos.y += vel.y;
-		this.boundry_collision_detenction(oldPos, simulation.options.size);
+		this.boundry_collision_detenction(oldPos, simulation.size);
 	}
 
 	old_move(simulation, dT) {
@@ -65,10 +64,10 @@ class Human {
 		this.pos.x += (Math.random() * 2 - 1) * this.moveSpeed; // random number between -1 and 1
 		this.pos.y += (Math.random() * 2 - 1) * this.moveSpeed; // random number between -1 and 1
 
-		if (this.pos.x < 0 || this.pos.x > simulation.options.size.x) {
+		if (this.pos.x < 0 || this.pos.x > simulation.size.x) {
 			this.pos.x = oldPos.x;
 		}
-		if (this.pos.y < 0 || this.pos.y > simulation.options.size.y) {
+		if (this.pos.y < 0 || this.pos.y > simulation.size.y) {
 			this.pos.y = oldPos.y;
 		}
 	}

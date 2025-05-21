@@ -23,6 +23,7 @@ class Graph {
 	}
 
 	update(simulation) {
+		
 		let data = {
 			suseptible: simulation.population.filter((h) => !(h.infected || h.removed)).length,
 			infected: simulation.population.filter((h) => h.infected).length,
@@ -46,6 +47,7 @@ class Graph {
 		infectedCanvas.width = this.size.x;
 		infectedCanvas.height = this.size.y;
 		let infectedCtx = infectedCanvas.getContext("2d");
+
 		let removedCanvas = document.createElement("canvas");
 		removedCanvas.width = this.size.x;
 		removedCanvas.height = this.size.y;

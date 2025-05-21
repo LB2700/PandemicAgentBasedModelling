@@ -1,8 +1,7 @@
 let mySelect = document.getElementById("select");
-console.log(mySelect);
 mySelect.onchange = (ev) => {
 	const selectedValue = ev.target.value;
-	simulation_options.populationSize = selectedValue;
+	simulation_options.scale = selectedValue;
 
 	restart();
 };
@@ -18,7 +17,7 @@ statsHTML.appendChild(infectedCountHTML);
 statsHTML.appendChild(recoveredCountHTML);
 statsHTML.appendChild(suseptibleCountHTML);
 statsHTML.setAttribute("id", "figures");
-document.getElementById("figures").appendChild(statsHTML)
+document.getElementById("figures").appendChild(statsHTML);
 // the canvas 'context' that gives us functions to draw with
 const ctx = canvas.getContext("2d");
 
@@ -34,12 +33,13 @@ canvas.height = CANVAS_SIZE.y;
 
 // create and start the simulation
 let simulation_options = {
+	scale: 1,
 	size: { x: 400, y: 400 },
-	populationSize: mySelect.children[0].getAttribute("value"),
+	populationSize: 400,
 };
 let mySimulation = new Simulation(simulation_options);
 mySimulation.offset = { x: 10, y: 10 };
-mySimulation.population[0].infect();
+mySimulation.population[0].infect(mySimulation.infectionTime);
 
 // create the graph
 let myGraph = new Graph({ x: 500, y: 300 }, { x: 0, y: 0 }, mySimulation.population.length);
@@ -52,14 +52,11 @@ myProfiler.event("test");
 let then = Date.now();
 
 function restart() {
-	if (myGraph && myGraph.canvas) {
-		document.body.removeChild(myGraph.canvas);
-	}
-	mySimulation = new Simulation(simulation_options);
-	mySimulation.offset = { x: 10, y: 10 };
-
+	// if (myGraph && myGraph.canvas) {
+	// 	document.body.removeChild(myGraph.canvas);
+	// }
+	mySimulation.restart(simulation_options);
 	mySimulation.population[0].infect();
-	myGraph = new Graph({ x: 500, y: 300 }, { x: 0, y: 0 }, mySimulation.population.length);
 
 	myGraph.restart();
 	then = Date.now();
@@ -89,14 +86,19 @@ function loop() {
 	recoveredCountHTML.innerHTML = `Recovered: ${mySimulation.population.filter((h) => h.removed).length}`;
 	suseptibleCountHTML.innerHTML = `Suseptible: ${
 		mySimulation.population.filter((h) => !(h.removed || h.infected)).length
-		}`;
-	
+	}`;
 
 	// continues the loop
 	if (mySimulation.population.filter((h) => h.infected).length != 0) {
 		window.requestAnimationFrame(loop);
+	} else {
+		mySimulation.show(ctx);
 	}
 }
 
 // starts the loop()
 window.requestAnimationFrame(loop);
+
+setInterval(() => {
+	myGraph.update(mySimulation);
+}, 200);

@@ -14,7 +14,6 @@
 * {
 	font-family: "Montserrat", sans-serif;
 	/* font-weight: 100; */
-	color: white;
 }
 
 body {
@@ -24,7 +23,8 @@ body {
 }
 
 h2 {
-	font-size: 15px;
+	font-size: 18px;
+	font-weight: 200;
 	color: white;
 	font-family: "Montserrat";
 	margin: 10px;
@@ -162,13 +162,15 @@ h1 {
 	justify-content: left;
 	flex-direction: column;
 	display: flex;
+	width: 100%;
 }
 
 #menu {
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-  margin-left: 10px;
-  min-width: 150px;
-  background-color: var(--raisin-black)
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+	margin-left: 10px;
+	min-width: 180px;
+	background-color: var(--raisin-black);
+	height: 100vh;
 }
