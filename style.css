@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 :root {
 	/* CSS HEX */
@@ -9,17 +10,21 @@
 	--indian-red: #d05153ff;
 	--icterine: #ffff70ff;
 	--spring-green: #3ef47eff;
+  --smoky: #dcdad9;
 }
 
 * {
 	font-family: "Montserrat", sans-serif;
 	/* font-weight: 100; */
+
 }
 
 body {
-	background-color: black;
+	background-color: var(--eerie-black);
 	display: flex;
 	flex-direction: row;
+  margin: 0px;
+  overflow: hidden;
 }
 
 h2 {
@@ -74,6 +79,13 @@ option:checked {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-color: #ddd;
+}
+
+option::checkmark {
+  order: 1;
+  margin-left: auto;
+  content: "";
+  /*to do better tick*/
 }
 
 button {
@@ -145,32 +157,47 @@ button {
 
 #charts {
 	display: flex;
-	justify-content: left;
+	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
+  padding: 20px;
+  width: max-content
 }
 
+#graph {
+  padding-inline: 20px;
+}
+
+#sim {
+  padding-inline: 20px;
+}
 h1 {
 	color: white;
 	font-family: "Montserrat";
+  font-weight: 150;
 	font-size: 40px;
 	margin: 10px;
 	text-align: left;
+  padding-left: 40px;
+  background-color: var(--falu-red);
+  width: 100%;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 100px;
 }
 
 #body {
 	justify-content: left;
 	flex-direction: column;
 	display: flex;
-	width: 100%;
 }
 
 #menu {
-	display: flex;
-	justify-content: space-evenly;
-	flex-direction: column;
-	margin-left: 10px;
-	min-width: 180px;
-	background-color: var(--raisin-black);
-	height: 100vh;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  margin-left: 10px;
+  min-width: 150px;
+  background-color: var(--raisin-black)
 }
