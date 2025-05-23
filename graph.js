@@ -1,5 +1,13 @@
+
+
 class Graph {
-	// collects and displays data
+	// handles the collection and display data
+
+	// data is collected in update
+
+	// draws the graphs on top of each other with the use of 
+	// in-memory canvas elements
+
 	constructor(size, position, populationSize) {
 		this.canvas = document.createElement("canvas");
 		this.ctx = this.canvas.getContext("2d");
@@ -89,47 +97,7 @@ class Graph {
 			true
 		);
 		this.ctx.drawImage(removedCanvas, this.pos.x, this.pos.y);
-
-		// this.infectedCtx.reset();
-		// this.infectedCtx.beginPath();
-		// this.infectedCtx.fillStyle = "#ff0000";
-		// this.infectedCtx.moveTo(0, this.size.y);
-
-		// this.removedCtx.reset();
-		// this.removedCtx.beginPath();
-		// this.removedCtx.fillStyle = "#ffff00";
-		// this.removedCtx.moveTo(0, this.size.y);
-
-		// this.history.forEach((data, i) => {
-		// 	let x = (i * this.size.x) / this.history.length;
-		// 	this.suseptibleCtx.lineTo(
-		// 		x,
-		// 		this.size.y - ((data.suseptible + data.infected + data.removed) * this.size.y) / this.populationSize
-		// 	);
-		// 	this.infectedCtx.lineTo(x, this.size.y - (data.infected * this.size.y) / this.populationSize);
-		// 	this.removedCtx.lineTo(x, this.size.y - ((data.removed + data.infected) * this.size.y) / this.populationSize);
-		// });
-		// this.suseptibleCtx.lineTo(this.size.x, this.size.y);
-		// this.suseptibleCtx.lineTo(0, this.size.y);
-		// this.suseptibleCtx.fill();
-		// this.suseptibleCtx.closePath();
-
-		// this.infectedCtx.lineTo(this.size.x, this.size.y);
-		// this.infectedCtx.lineTo(0, this.size.y);
-		// this.infectedCtx.fill();
-		// this.infectedCtx.closePath();
-
-		// this.removedCtx.lineTo(this.size.x, this.size.y);
-		// this.removedCtx.lineTo(0, this.size.y);
-		// this.removedCtx.fill();
-		// this.removedCtx.closePath();
-		//console.log(this.suseptibleCtx.getImageData(0, 0, this.size.x, this.size.y));
-		//ctx.drawImage(infectedCanvas, this.pos.x, this.pos.y);
-		//ctx.drawImage(this.removedCanvas, this.pos.x, this.pos.y);
-		//ctx.drawImage(this.infectedCanvas, this.pos.x, this.pos.y);
 	}
-
-	fillGraph(ctx) {}
 
 	drawAxes(ctx) {
 		this.ctx.beginPath();

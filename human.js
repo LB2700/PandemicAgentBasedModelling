@@ -1,4 +1,8 @@
 class Human {
+	// the human class contians all the calculations regarding movement
+	// also contains logic to keep track of state based on the SIR model
+	// handles the infection of other humans
+
 	constructor(x, y, i) {
 		this.index = i;
 		this.pos = { x, y };
@@ -49,13 +53,27 @@ class Human {
 		let oldPos = { ...this.pos };
 		let sdA = this.get_social_distance_velocity(simulation, dT);
 		let pA = this.get_perlin_velocity(simulation, dT);
+		//console.log(sdA);
 		let vel = {
-			x: lerp(sdA.x, pA.x, 0.9) * simulation.globalTimeStretch * simulation.scale,
-			y: lerp(sdA.y, pA.y, 0.9) * simulation.globalTimeStretch * simulation.scale,
+			x: lerp(pA.x, sdA.x, simulation.perlinMovePercentage),
+			y: lerp(pA.y, sdA.y, simulation.perlinMovePercentage),
 		};
-		this.pos.x += vel.x;
-		this.pos.y += vel.y;
-		this.boundry_collision_detenction(oldPos, simulation.size);
+
+		// solves the issue with clumping on the edges? pretty much just applies the social distancing algorithm to the edges
+		// along with the other humans. Doesn't solve the issue entirely, humans will still clump at high densities but sure look.
+		//if (simulation.populationBehaviour !== 2) {
+		let scale = 0.002;
+		let base = 0.1;
+		let speedLimit = 0.1;
+		let threshhold = 0.05;
+		vel.x += Math.min(Math.pow(base, this.pos.x / threshhold - 1) * scale, speedLimit);
+		vel.x -= Math.min(Math.pow(base, (1 - this.pos.x) / threshhold - 1) * scale, speedLimit);
+		vel.y += Math.min(Math.pow(base, this.pos.y / threshhold - 1) * scale, speedLimit);
+		vel.y -= Math.min(Math.pow(base, (1 - this.pos.y) / threshhold - 1) * scale, speedLimit);
+
+		this.pos.x += vel.x * simulation.globalTimeStretch * simulation.scale * simulation.humanSpeed;
+		this.pos.y += vel.y * simulation.globalTimeStretch * simulation.scale * simulation.humanSpeed;
+		this.boundry_collision_detection(oldPos, simulation.size);
 	}
 
 	old_move(simulation, dT) {
@@ -72,35 +90,40 @@ class Human {
 		}
 	}
 
-	get_social_distance_velocity(simulation, dT) {
+	get_social_distance_velocity(simulation) {
 		let out = { x: 0, y: 0 };
 		let optimization = 10;
 
 		// TODO: some visuals to go along with the project to explain some of the algorithms we used? like how we optimised this with the filter. lmk could be a shout
 		simulation.population.forEach((oHuman) => {
 			if (oHuman.index === this.index) return;
+			if (simulation.populationBehaviour == 2 && (this.infected || !oHuman.infected)) return;
+			if (simulation.populationBehaviour == 3) return;
+			//
 			let d = Math.min((simulation.scaledSocialDistanceRadiusSquared / distSquared(oHuman.pos, this.pos)) ** 2, 1);
+			//let d = (simulation.scaledSocialDistanceRadiusSquared / distSquared(oHuman.pos, this.pos)) * 0.02;
+			//if (!isFinite(d)) console.log(this);
+			//console.log(d);
 
 			let newVel = { x: (this.pos.x - oHuman.pos.x) * d, y: (this.pos.y - oHuman.pos.y) * d };
 			out.x += newVel.x;
 			out.y += newVel.y;
 		});
 
-		// solves the issue with clumping on the edges? pretty much just applies the social distancing algorithm to the edges
-		// along with the other humans. Doesn't solve the issue entirely, humans will still clump at high densities but sure look.
-		out.x += Math.min((simulation.scaledSocialDistanceRadius / -this.pos.x) ** 2 * 0.05, 0.2);
-		out.x -= Math.min((simulation.scaledSocialDistanceRadius / (this.pos.x - 1)) ** 2 * 0.05, 0.2);
-		out.y += Math.min((simulation.scaledSocialDistanceRadius / -this.pos.y) ** 2 * 0.05, 0.2);
-		out.y -= Math.min((simulation.scaledSocialDistanceRadius / (this.pos.y - 1)) ** 2 * 0.05, 0.2);
+		//}
+		// out.x -= Math.min((simulation.scaledSocialDistanceRadius / (this.pos.x - 1)) ** 2 * 0.05, 0.2);
+		// out.y += Math.min((simulation.scaledSocialDistanceRadius / -this.pos.y) ** 2 * 0.05, 0.2);
+		// out.y -= Math.min((simulation.scaledSocialDistanceRadius / (this.pos.y - 1)) ** 2 * 0.05, 0.2);
 
 		// scale end result for ease of tweaking
 		out.x *= simulation.socialDistanceScalar;
 		out.y *= simulation.socialDistanceScalar;
+		//console.log(out);
 
 		return out;
 	}
 
-	boundry_collision_detenction(oldPos, size) {
+	boundry_collision_detection(oldPos, size) {
 		if (this.pos.x < 0 || this.pos.x > 1) {
 			this.pos.x = oldPos.x;
 		}
@@ -109,7 +132,7 @@ class Human {
 		}
 	}
 
-	get_perlin_velocity(simulation, dT) {
+	get_perlin_velocity(simulation) {
 		let oldPos = { ...this.pos };
 		return {
 			x:
@@ -120,7 +143,7 @@ class Human {
 				simulation.perlinScalar,
 		};
 	}
-	infectOthers(simulation, dT) {
+	infectOthers(simulation) {
 		// would need to loop through every other human in the system and potentially 'infect' them.
 		if (this.infected) {
 			let filtered = simulation.population.filter((oHuman) => {
@@ -143,7 +166,7 @@ class Human {
 			});
 
 			filtered.forEach((oH) => {
-				if (Math.random() * simulation.globalTimeStretch < simulation.contractionProbability * dT) {
+				if (Math.random() * simulation.globalTimeStretch < simulation.contractionProbability) {
 					oH.infect(simulation.infectionTime);
 				}
 			});

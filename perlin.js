@@ -1,3 +1,6 @@
+// NOT OUR CODE!
+// slightly modified to get rid of a 'memory' functionality, that just resulted in a memory leak :(
+
 //https://joeiddon.github.io/perlin/perlin.js;
 
 "use strict";

@@ -51,59 +51,141 @@
 		<h2 class="Header ABPM">Agent Based Pandemic Modelling</h2>
 
 		<div id="menu">
+			<div class="restart_button">
+				<button onclick="restart()">Restart</button>
+				<div id="debug"></div>
+			</div>
 			<div class="Settings">
-				<h3 class="Header">Settings</h3>
-
-				<div class="SelectWrapper">
-					<h4 class="SelectLabel">Population Density</h4>
-					<select class="PopulationPicker">
-						<option value="4">New York</option>
-						<option value="3">Multan</option>
-						<option value="2">Bejing</option>
-						<option value="1">London</option>
-					</select>
+				<div class="SettingsCatagory">
+					<h3 class="SelectLabel">Simulation Settings</h3>
+					<div class="SelectWrapper">
+						<p>preset:</p>
+						<select class="PopulationPicker">
+							<option value="10">New York</option>
+							<option value="3">Multan</option>
+							<option value="2">Bejing</option>
+							<option value="1">London</option>
+						</select>
+					</div>
+					<div class="Sliders">
+						<div
+							data-sim-prop-name="populationSize"
+							class="ControlWrapper"
+						>
+							<h4>Population Count</h4>
+							<div class="SliderWrapper">
+								<input
+									class="SliderSetting PopulationSize"
+									type="range"
+									min="50"
+									max="1000"
+									step="1"
+									list="PopulationSizeMarkers"
+								/>
+								<datalist
+									class="SliderDatalist"
+									id="PopulationSizeMarkers"
+								>
+									<option value="0">50</option>
+									<option value="1">1000</option>
+								</datalist>
+							</div>
+							<input
+								class="ControlNumberInput"
+								type="number"
+								min="0"
+								max="10"
+							/>
+						</div>
+					</div>
 				</div>
 
-				<div class="SelectWrapper">
-					<h4 class="SelectLabel">Virus</h4>
+				<div class="SettingsCatagory">
+					<h3 class="SelectLabel">Virus</h3>
 					<select class="VirusPicker">
 						<option value="3">Measles</option>
 						<option value="2">Black Plague</option>
 						<option value="1">AIDS</option>
 					</select>
+					<div class="Sliders">
+						<div
+							data-sim-prop-name="contractionRadius"
+							class="ControlWrapper"
+						>
+							<h4>Infection Radius</h4>
+							<div class="SliderWrapper">
+								<input
+									class="SliderSetting InfectionRadius"
+									type="range"
+									min="0"
+									max="0.5"
+									step="0.01"
+									list="InfectionRadiusMarkers"
+								/>
+								<datalist
+									class="SliderDatalist"
+									id="InfectionRadiusMarkers"
+								>
+									<option value="0">10</option>
+									<option value="1">100</option>
+								</datalist>
+							</div>
+							<input
+								class="ControlNumberInput"
+								type="number"
+								min="0"
+								max="10"
+							/>
+						</div>
+
+						<div
+							data-sim-prop-name="contractionProbability"
+							class="ControlWrapper"
+						>
+							<h4>Contraction Probability</h4>
+							<div class="SliderWrapper">
+								<input
+									class="SliderSetting ContractionProbability"
+									type="range"
+									min="0"
+									max="0.2"
+									step="0.001"
+									list="contractionProbabilityMarkers"
+								/>
+								<datalist
+									class="SliderDatalist"
+									id="contractionProbabilityMarkers"
+								>
+									<option value="0">0</option>
+									<option value="1">0.2</option>
+								</datalist>
+							</div>
+							<input
+								class="ControlNumberInput"
+								type="number"
+								min="0"
+								max="10"
+							/>
+						</div>
+					</div>
 				</div>
 
-				<div id="slider">
-					<label for="infectibility">Infectibility</label>
-					<input
-						type="range"
-						id="slider"
-						name="slider"
-						min="0"
-						max="10"
-					/>
-					<datalist id="markers">
-						<option value="0">0</option>
-						<option value="2">2</option>
-						<option value="4">4</option>
-						<option value="6">6</option>
-						<option value="8">8</option>
-						<option value="10">10</option>
-					</datalist>
+				<div class="SettingsCatagory">
+					<h4 class="SelectLabel">Population Behaviour</h4>
+					<select class="PopBehaviourPicker">
+						<option value="1">Avoid All</option>
+						<option value="2">Avoid Infected</option>
+						<option value="3">Avoid None</option>
+					</select>
 				</div>
 			</div>
-
-			<div class="restart_button">
-				<button onclick="restart()">Restart</button>
-				<div id="debug"></div>
-			</div>
-
-			<div id="figures"></div>
 		</div>
 
 		<div id="body">
 			<div id="charts">
-				<div id="sim"></div>
+				<div id="sim">
+					<div id="figures"></div>
+				</div>
 				<div id="graph"></div>
 			</div>
 		</div>

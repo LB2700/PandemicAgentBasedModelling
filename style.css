@@ -10,19 +10,20 @@
 	--indian-red: #d05153ff;
 	--icterine: #ffff70ff;
 	--spring-green: #3ef47eff;
-	--smoky: #e3dfdc;
-	--smoky-dark: #bebbba;
+	--smoky: #aaa6a4;
+	--smoky-dark: #8c8887;
 }
 
 * {
 	font-family: "Montserrat", sans-serif;
+	margin: 0;
 	/* font-weight: 100; */
 }
 
 body {
 	background-color: var(--raisin-black);
 	display: grid;
-	grid-template-columns: 180px auto;
+	grid-template-columns: min-content auto;
 	grid-template-rows: 64px auto;
 	height: 100vh;
 	margin: 0px;
@@ -38,6 +39,18 @@ h4 {
 
 .SelectLabel {
 	margin: 0 0 2px 0;
+}
+.SelectWrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 6px;
+	align-items: center;
+}
+.Sliders {
+	margin-block: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 h2.Header {
@@ -70,13 +83,16 @@ select,
 	background-color: white;
 }
 
-select {
+select,
+::picker(select) {
 	border: 2px solid #ddd;
 	background: #eee;
-	padding: 2px;
-	transition: 0.4s;
 	border-radius: 5px;
-	min-width: 100px;
+}
+
+select {
+	transition: 0.4s;
+	width: 160px;
 	height: 30px;
 	text-align: center;
 	display: flex;
@@ -89,32 +105,28 @@ select {
 select:open::picker-icon {
 	rotate: 180deg;
 }
-select:open {
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
-	background-color: #eee;
-}
 selectedcontent .icon {
 	display: none;
+}
+option {
+	background-color: #00000000;
+}
+option:hover,
+option:checked {
+	background-color: #00000010;
 }
 option:checked {
 	font-weight: bold;
 }
 
-::picker(select) {
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-color: #ddd;
-}
-
+/* 
 option::checkmark {
 	order: 1;
 	margin-left: auto;
 	content: "";
-	/*to do better tick*/
+	/*to do better tick
 }
+*/
 
 button {
 	border: 2px solid #ddd;
@@ -141,31 +153,29 @@ button {
 	justify-content: left;
 }
 
-#slider input[type="range"] {
+input[type="range"] {
 	-webkit-appearance: none;
 	appearance: none;
-	width: 100px;
-	height: 5px;
-	border-radius: 5px;
-	border: 2px solid #ddd;
-	padding: 0px;
+	height: 6px;
+	border-radius: 6px;
+	border: 2px solid #dedec7;
 	outline: none;
-	padding: 0px 0;
-	background-color: rgb(12, 255, 8);
+	background-color: var(--spring-green);
+	position: relative;
 }
-#slider input[type="range"]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
+	position: relative;
+	top: -7.5px;
 	-webkit-appearance: none;
 	appearance: none;
-	width: 15px;
-	height: 15px;
+	width: 18px;
+	height: 18px;
 	border-radius: 50%;
 	cursor: pointer;
-	margin-top: -5px;
-	background-color: rgb(12, 255, 8);
+	background-color: var(--spring-green);
 }
 
-#markers {
-	width: 100px;
+.SliderDatalist {
 	display: flex;
 	justify-content: space-between;
 	color: white;
@@ -227,4 +237,35 @@ h1 {
 }
 #menu * {
 	color: #000000;
+}
+#figures {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+#figures * {
+	color: var(--smoky);
+	margin: 0;
+}
+
+.ControlWrapper {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	gap: 3px 10px;
+}
+.ControlWrapper > h4 {
+	grid-column: 1 / span 2;
+}
+.ControlNumberInput::-webkit-inner-spin-button,
+.ControlNumberInput::-webkit-outer-spin-button {
+	appearance: none;
+}
+.ControlNumberInput {
+	background-color: #0000002b;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	padding: 6px;
+	max-width: 3em;
 }
