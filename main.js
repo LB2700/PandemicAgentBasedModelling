@@ -112,6 +112,19 @@ document.body.querySelectorAll(".ControlWrapper").forEach((wrapper) => {
 	};
 });
 
+// open close buttons, toggle data-enable attribute. CSS takes care of the rest
+document.querySelector("button.OpenCloseSettings.SimulationSettings").onclick = (ev) => {
+	let target = document.querySelector(".SettingsCatagory.SimSettings .Sliders");
+	target.setAttribute("data-enabled", target.getAttribute("data-enabled") == "true" ? "false" : "true");
+	ev.target.innerHTML = target.getAttribute("data-enabled") == "true" ? "Close" : "Open";
+};
+
+document.querySelector("button.OpenCloseSettings.VirusSettings").onclick = (ev) => {
+	let target = document.querySelector(".SettingsCatagory.VirusSettings .Sliders");
+	target.setAttribute("data-enabled", target.getAttribute("data-enabled") == "true" ? "false" : "true");
+	ev.target.innerHTML = target.getAttribute("data-enabled") == "true" ? "Close" : "Open";
+};
+
 function restart() {
 	// if (myGraph && myGraph.canvas) {
 	// 	document.body.removeChild(myGraph.canvas);
@@ -119,6 +132,17 @@ function restart() {
 	simulation_options = { ...simulation_options, ...virusPresets[currentVirus], populationBehaviour };
 	mySimulation.restart(simulation_options);
 	mySimulation.population[0].infect(mySimulation.infectionTime);
+
+	// update UI controls to represent the current simulation parameters
+	Object.entries(mySimulation).forEach((e) => {
+		let target = document.querySelector(`*[data-sim-prop-name=${e[0]}]`);
+		if (target) {
+			let slider = target.querySelector(".SliderSetting");
+			let number = target.querySelector(".ControlNumberInput");
+			slider.value = e[1];
+			number.value = e[1];
+		}
+	});
 
 	myGraph.restart();
 	then = Date.now();
