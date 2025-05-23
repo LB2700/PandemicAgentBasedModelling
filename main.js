@@ -23,7 +23,9 @@ const virusPresets = [
 
 // TODO: make preset pickers update theyre relevent sliders, idk how im gonna do this ngl
 document.querySelector("select.VirusPicker").onchange = (ev) => {
-	currentVirus = ev.target.value;
+	Object.entries(virusPresets[ev.target.value]).forEach((e) => {
+		Object.defineProperty(mySimulation, e[0], { value: e[1], writable: true });
+	});
 	restart();
 };
 
@@ -65,10 +67,9 @@ canvas.height = CANVAS_SIZE.y;
 let simulation_options = {
 	scale: 4,
 	size: { x: 400, y: 400 },
-	...virusPresets[currentVirus],
 	populationBehaviour,
 };
-let mySimulation = new Simulation({ ...simulation_options, populationSize: 200 });
+let mySimulation = new Simulation({ ...simulation_options, populationSize: 150 });
 mySimulation.offset = { x: 2, y: 2 };
 mySimulation.population[0].infect(mySimulation.infectionTime);
 
@@ -129,7 +130,7 @@ function restart() {
 	// if (myGraph && myGraph.canvas) {
 	// 	document.body.removeChild(myGraph.canvas);
 	// }
-	simulation_options = { ...simulation_options, ...virusPresets[currentVirus], populationBehaviour };
+	simulation_options = { ...simulation_options, populationBehaviour };
 	mySimulation.restart(simulation_options);
 	mySimulation.population[0].infect(mySimulation.infectionTime);
 
@@ -151,6 +152,8 @@ function restart() {
 }
 
 function loop() {
+	//console.log(mySimulation.population[0].infectionTime);
+
 	now = Date.now();
 	deltaTime = (now - then) / 1000;
 	then = now;
@@ -175,8 +178,7 @@ function loop() {
 	}`;
 
 	// continues the loop
-	if (true) {
-		//mySimulation.population.filter((h) => h.infected).length != 0) {
+	if (mySimulation.population.filter((h) => h.infected).length != 0) {
 		window.requestAnimationFrame(loop);
 	} else {
 		mySimulation.show(ctx);

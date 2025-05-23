@@ -55,6 +55,8 @@
 				<button onclick="restart()">Restart</button>
 				<div id="debug"></div>
 			</div>
+			<div class="horizontalSeperator"></div>
+
 			<div class="Settings">
 				<div class="SettingsCatagory SimSettings">
 					<h3 class="SelectLabel">Simulation Settings</h3>
@@ -105,14 +107,19 @@
 					</div>
 				</div>
 
+				<div class="horizontalSeperator"></div>
+
 				<div class="SettingsCatagory VirusSettings">
-					<h3 class="SelectLabel">Virus</h3>
-					<select class="VirusPicker">
-						<option value="4">Spanish Flu</option>
-						<option value="3">Measles</option>
-						<option value="2">Black Plague</option>
-						<option value="1">COVID</option>
-					</select>
+					<h3 class="SelectLabel">Virus Settings</h3>
+					<div class="SelectWrapper">
+						<p>presets:</p>
+						<select class="VirusPicker">
+							<option value="4">Spanish Flu</option>
+							<option value="3">Measles</option>
+							<option value="2">Black Plague</option>
+							<option value="1">COVID</option>
+						</select>
+					</div>
 					<button class="OpenCloseSettings VirusSettings">Close</button>
 
 					<div
@@ -178,16 +185,112 @@
 								max="10"
 							/>
 						</div>
+
+						<div
+							data-sim-prop-name="infectionTime"
+							class="ControlWrapper"
+						>
+							<h4>Infection Time</h4>
+							<div class="SliderWrapper">
+								<input
+									class="SliderSetting infectionTime"
+									type="range"
+									min="60"
+									max="1200"
+									step="1"
+									list="infectionTimeMarkers"
+								/>
+								<datalist
+									class="SliderDatalist"
+									id="infectionTimeMarkers"
+								>
+									<option value="60">60</option>
+									<option value="1200">1200</option>
+								</datalist>
+							</div>
+							<input
+								class="ControlNumberInput"
+								type="number"
+								min="0"
+								max="10"
+							/>
+						</div>
 					</div>
 				</div>
 
-				<div class="SettingsCatagory">
-					<h4 class="SelectLabel">Population Behaviour</h4>
+				<div class="horizontalSeperator"></div>
+
+				<div class="SettingsCatagory PopulationBehaviour">
+					<h3 class="SelectLabel">Population Behaviour</h3>
 					<select class="PopBehaviourPicker">
 						<option value="1">Avoid All</option>
 						<option value="2">Avoid Infected</option>
 						<option value="3">Avoid None</option>
 					</select>
+					<div
+						data-enabled="true"
+						class="Sliders"
+					>
+						<div
+							data-sim-prop-name="humanSpeed"
+							class="ControlWrapper"
+						>
+							<h4>Speed</h4>
+							<div class="SliderWrapper">
+								<input
+									class="SliderSetting HumanSpeed"
+									type="range"
+									min="0"
+									max="5"
+									step="0.01"
+									list="HumanSpeedMarkers"
+								/>
+								<datalist
+									class="SliderDatalist"
+									id="HumanSpeedMarkers"
+								>
+									<option value="0">0</option>
+									<option value="0.1">5</option>
+								</datalist>
+							</div>
+							<input
+								class="ControlNumberInput"
+								type="number"
+								min="0"
+								max="10"
+							/>
+						</div>
+
+						<div
+							data-sim-prop-name="perlinMovePercentage"
+							class="ControlWrapper"
+						>
+							<h4>Social Distance Weight</h4>
+							<div class="SliderWrapper">
+								<input
+									class="SliderSetting perlinMovePercentage"
+									type="range"
+									min="0"
+									max="1"
+									step="0.01"
+									list="perlinMovePercentageMarkers"
+								/>
+								<datalist
+									class="SliderDatalist"
+									id="perlinMovePercentageMarkers"
+								>
+									<option value="0">0</option>
+									<option value="1">1</option>
+								</datalist>
+							</div>
+							<input
+								class="ControlNumberInput"
+								type="number"
+								min="0"
+								max="10"
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

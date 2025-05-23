@@ -31,17 +31,17 @@ class Simulation {
 		// human parameters
 		this.populationBehaviour = options.populationBehaviour;
 		this.perlinAcceleration = 0.7;
-		this.perlinScalar = 1;
-		this.socialDistanceScalar = 0.2;
+		this.perlinScalar = 0.003;
+		this.socialDistanceScalar = 0.01;
 		this.socialDistanceRadius = 0.02;
 		this.perlinMovePercentage = 0.95;
-		this.humanSpeed = 0.01;
+		this.humanSpeed = 1;
 
 		// infection parameters
-		this.contractionProbability = options.contractionProbability;
-		this.contractionRadius = options.contractionRadius;
+		this.contractionProbability = 0.05;
+		this.contractionRadius = 0.05;
 		this.contractionRadiusSquared = this.contractionRadius ** 2;
-		this.infectionTime = options.infectionTime;
+		this.infectionTime = 300;
 
 		// scaled
 		this.scaledContractionRadiusSquared = this.contractionRadiusSquared * this.scale;
@@ -120,10 +120,7 @@ class Simulation {
 		this.populationBehaviour = options.populationBehaviour;
 
 		// infection parameters
-		this.contractionProbability = options.contractionProbability;
-		this.contractionRadius = options.contractionRadius;
 		this.contractionRadiusSquared = this.contractionRadius ** 2;
-		this.infectionTime = options.infectionTime;
 
 		this.scale = options.scale;
 		this.population = [];

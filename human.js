@@ -71,8 +71,8 @@ class Human {
 		vel.y += Math.min(Math.pow(base, this.pos.y / threshhold - 1) * scale, speedLimit);
 		vel.y -= Math.min(Math.pow(base, (1 - this.pos.y) / threshhold - 1) * scale, speedLimit);
 
-		this.pos.x += vel.x * simulation.globalTimeStretch * simulation.scale * simulation.humanSpeed;
-		this.pos.y += vel.y * simulation.globalTimeStretch * simulation.scale * simulation.humanSpeed;
+		this.pos.x += vel.x * simulation.globalTimeStretch * simulation.scale * simulation.humanSpeed * 0.1;
+		this.pos.y += vel.y * simulation.globalTimeStretch * simulation.scale * simulation.humanSpeed * 0.1;
 		this.boundry_collision_detection(oldPos, simulation.size);
 	}
 
@@ -149,6 +149,7 @@ class Human {
 			let filtered = simulation.population.filter((oHuman) => {
 				if (oHuman.index === this.index) return false;
 				if (oHuman.removed) return false;
+				if (oHuman.infected) return false;
 
 				let min = {
 					x: this.pos.x - simulation.contractionRadius * 2,

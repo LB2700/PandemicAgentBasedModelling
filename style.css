@@ -28,7 +28,7 @@ body {
 	grid-template-rows: 64px auto;
 	height: 100vh;
 	margin: 0px;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 a {
@@ -288,4 +288,10 @@ h1 {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+}
+
+.horizontalSeperator {
+	height: 2px;
+	background-color: var(--smoky);
+	width: 100%;
 }
