@@ -28,7 +28,7 @@ body {
 	grid-template-rows: 64px auto;
 	height: 100vh;
 	margin: 0px;
-	overflow: hidden;
+	overflow: auto;
 }
 
 a {
